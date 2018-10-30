@@ -10,13 +10,34 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d")
 
+var x = 95
+var y = 50
+
+var vx = 5
+var vy = 5
+
+var ax = 0.5
+var ay = 0.5
+
 function draw() {
+    context.clearRect(0,0,canvas.width,canvas.height)
+    vx = vx + ax
+    vy = vy + ay
+    x = x + vx
+    y = y + vy
+    if (x < 0 || x > canvas.width) {
+        vx = -vx
+    }
+    if (y < 0 || y > canvas.height) {
+        vy = -vy
+    }
     context.beginPath();
-    context.arc(95, 50, 40, 0, 2 * Math.PI);
+    context.arc(x, y, 40, 0, 2 * Math.PI);
     context.stroke();
+    requestAnimationFrame(draw)
 }
 
-draw();
+requestAnimationFrame(draw)
 </script>
     </body>
 </html>
